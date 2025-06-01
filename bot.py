@@ -56,16 +56,16 @@ async def message(interaction: discord.Interaction, text: str):
     Args:
         text: The text to convert
     """
-    # Keep spaces but remove other punctuation
-    filtered_text = ''.join(c if c.isspace() else c.lower() for c in text if c.isalnum() or c.isspace())
+    # replace spaces with _ and remove other punctiation for now
+    filtered_text = ''.join('_' if c.isspace() else c for c in text if c.isalnum() or c.isspace())
     
     if not filtered_text:
         await interaction.response.send_message("Please enter some text with letters or numbers!")
         return
     
-    # Process all characters in groups of 5
-    for i in range(0, len(filtered_text), 5):
-        chars = filtered_text[i:i+5]  # Get next 5 characters
+    # Process all characters in groups of 7
+    for i in range(0, len(filtered_text), 7):
+        chars = filtered_text[i:i+7]  # Get next 7 characters
         
         # Process each line (1-6) for all characters
         message_rows = []
