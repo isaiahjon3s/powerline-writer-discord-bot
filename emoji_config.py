@@ -1,25 +1,25 @@
 # Emoji definitions
 EMOJIS = {
-    'vl': '<:vl:1376092834356006954>',
-    'hl': '<:hl:1376092817444835339>',
-    'gd': '<:gd:1376092783458123796>',
-    'l1': '<:l1:1376086874401144885>',
-    'l2': '<:l2:1376086853689540639>',
-    'l3': '<:l3:1376086831166263317>',
-    'l4': '<:l4:1376086803865407520>',
-    't1': '<:t1:1376264977848995840>',
-    't2': '<:t2:1376265050280693891>',
-    't3': '<:t3:1376265090424373408>',
-    't4': '<:t4:1376265149085647009>',
-    'i1': '<:i1:1376093284258156606>',
-    'i2': '<:i2:1376093263249014795>',
-    'i3': '<:i3:1376093303208153169>',
-    'i4': '<:i4:1376093242596130887>',
-    'h1': '<:h1:1376093217149288448>',
-    'h2': '<:h2:1376093199571091496>',
-    'h3': '<:h3:1378075677907226696>',  
-    'h4': '<:h4:1376093179295694901>',
-    'x1': '<:x1:1376265190038966312>'
+    'vl': ('<:vl:1376092834356006954>', 2),
+    'hl': ('<:hl:1376092817444835339>', 2),
+    'gd': ('<:gd:1376092783458123796>', 0),
+    'l1': ('<:l1:1376086874401144885>', 2),
+    'l2': ('<:l2:1376086853689540639>', 2),
+    'l3': ('<:l3:1376086831166263317>', 2),
+    'l4': ('<:l4:1376086803865407520>', 2),
+    't1': ('<:t1:1376264977848995840>', 2),
+    't2': ('<:t2:1376265050280693891>', 3),
+    't3': ('<:t3:1376265090424373408>', 3),
+    't4': ('<:t4:1376265149085647009>', 3),
+    'i1': ('<:i1:1376093284258156606>', 1),
+    'i2': ('<:i2:1376093263249014795>', 1),
+    'i3': ('<:i3:1376093303208153169>', 1),
+    'i4': ('<:i4:1376093242596130887>', 1),
+    'h1': ('<:h1:1376093217149288448>', 1),
+    'h2': ('<:h2:1376093199571091496>', 1),
+    'h3': ('<:h3:1378075677907226696>', 1),  
+    'h4': ('<:h4:1376093179295694901>', 1),
+    'x1': ('<:x1:1376265190038966312>', 4)
 }
 
 # Create reverse mapping for emoji conversion
@@ -33,7 +33,7 @@ def get_emoji(name: str) -> str:
     Returns:
         The emoji string
     """
-    return EMOJIS.get(name, name)
+    return EMOJIS.get(name, name)[0]  # Return just the emoji string, not the length
 
 def convert_emoji_string(input_string: str) -> str:
     """
@@ -118,7 +118,46 @@ def get_all_emojis_for_letter(letter: str) -> list:
     Returns:
         List of all emojis for that letter
     """
-    letter = letter.lower()
-    emojis = LETTER_FORMATS.get(letter, [letter])
-    # Convert 'vl' to the actual emoji in the list
-    return [':vl:' if emoji == 'vl' else emoji for emoji in emojis] 
+    letter = letter.upper()  # Convert to uppercase since patterns are in uppercase
+    if letter not in LETTER_PATTERNS["LETTER_PATTERNS"]:
+        return [letter]
+    
+    # Get all emojis from all lines
+    emojis = []
+    for line in LETTER_PATTERNS["LETTER_PATTERNS"][letter].values():
+        emojis.extend(line)
+    
+    # Convert to actual emoji strings
+    return [get_emoji(emoji) for emoji in emojis]
+
+def get_longest_letter(letters: str) -> str:
+    """
+    Determine which letter in the input has the longest emoji representation.
+    Args:
+        letters: String of letters to check (should be 3 letters)
+    Returns:
+        The letter with the longest emoji representation
+    """
+    if len(letters) != 3:
+        raise ValueError("Input must be exactly 3 letters")
+    
+    max_length = 0
+    longest_letter = letters[0]
+    
+    for letter in letters:
+        letter = letter.upper()  # Convert to uppercase since patterns are in uppercase
+        if letter in LETTER_PATTERNS["LETTER_PATTERNS"]:
+            # Get all lines for this letter
+            letter_pattern = LETTER_PATTERNS["LETTER_PATTERNS"][letter]
+            # Find the maximum length among all emojis in all lines
+            letter_length = max(
+                EMOJIS[emoji][1] 
+                for line in letter_pattern.values() 
+                for emoji in line 
+                if emoji in EMOJIS
+            )
+            if letter_length > max_length:
+                max_length = letter_length
+                longest_letter = letter
+    
+    return longest_letter 

@@ -1,5 +1,13 @@
 {
   "LETTER_PATTERNS": {
+    " ": {
+      "line_1": ["gd", "gd", "gd", "gd"],
+      "line_2": ["gd", "gd", "gd", "gd"],
+      "line_3": ["gd", "gd", "gd", "gd"],
+      "line_4": ["gd", "gd", "gd", "gd"],
+      "line_5": ["gd", "gd", "gd", "gd"],
+      "line_6": ["gd", "gd", "gd", "gd"]
+    },
     "A": {
         "line_1": ["l4", "hl", "i2", "h1"],
         "line_2": ["vl", "l4", "l3", "vl"],
@@ -287,13 +295,6 @@
         "line_4": ["l1", "hl", "l3", "vl"],
         "line_5": ["l4", "hl", "l2", "vl"],
         "line_6": ["l1", "hl", "hl", "l2"]
-      },
-    "_": {
-        "line_1": ["gd", "gd", "gd", "gd"],
-        "line_3": ["gd", "gd", "gd", "gd"],
-        "line_4": ["gd", "gd", "gd", "gd"],
-        "line_5": ["gd", "gd", "gd", "gd"],
-        "line_6": ["gd", "gd", "gd", "gd"]
       },
     "a": {
         "line_1": ["gd", "gd", "gd", "gd"],
@@ -1441,6 +1442,44 @@
         "gd",
         "gd",
         "gd"
+      ]
+    },
+    "_": {
+      "line_1": [
+        "gd",
+        "gd",
+        "gd",
+        "gd"
+      ],
+      "line_2": [
+        "gd",
+        "gd",
+        "gd",
+        "gd"
+      ],
+      "line_3": [
+        "gd",
+        "gd",
+        "gd",
+        "gd"
+      ],
+      "line_4": [
+        "gd",
+        "gd",
+        "gd",
+        "gd"
+      ],
+      "line_5": [
+        "l4",
+        "i2",
+        "h2",
+        "l3"
+      ],
+      "line_6": [
+        "l1",
+        "hl",
+        "hl",
+        "l2"
       ]
     }
   }

@@ -65,8 +65,6 @@ async def message(interaction: discord.Interaction, text: str):
     # Check if all characters are in letter_patterns.json
     invalid_chars = []
     for char in text:
-        if char.isspace():
-            continue
         if char not in LETTER_PATTERNS["LETTER_PATTERNS"]:
             invalid_chars.append(char)
     
@@ -74,21 +72,18 @@ async def message(interaction: discord.Interaction, text: str):
         await interaction.response.send_message(f"Sorry, I can't convert {', '.join(set(invalid_chars))} into powerline", ephemeral=True)
         return
 
-    # replace spaces with _
-    filtered_text = ''.join('_' if c.isspace() else c for c in text)
-    
-    if contains_swearword(filtered_text):
+    if contains_swearword(text):
         responses = [
             "Stop fucking swearing you shit head",
-            "Nice try!"
+            "Nice try!",
             "Hey, no swearing!"
         ]
         await interaction.response.send_message(random.choice(responses), ephemeral=True)
         return
 
     # Process all characters in groups of 7
-    for i in range(0, len(filtered_text), 7):
-        chars = filtered_text[i:i+7]  # Get next 7 characters
+    for i in range(0, len(text), 7):
+        chars = text[i:i+7]  # Get next 7 characters
         
         # Process each line (1-6) for all characters
         message_rows = []
