@@ -58,22 +58,30 @@ async def message(interaction: discord.Interaction, text: str):
     Args:
         text: The text to convert
     """
-    # replace spaces with _ and remove anything thats not simple punctuation
-    allowed_punctuation = {'?', ')', '(', '!', '.'}
-    filtered_text = ''.join(
-    '_' if c.isspace() else c 
-    for c in text 
-    if c.isalnum() or c.isspace() or c in allowed_punctuation
-    )
-    
-    if not filtered_text:
-        await interaction.response.send_message("Please enter some text with letters or numbers!", ephemeral=True)
+    if not text.strip():
+        await interaction.response.send_message("Please enter some text!", ephemeral=True)
         return
-        
+
+    # Check if all characters are in letter_patterns.json
+    invalid_chars = []
+    for char in text:
+        if char.isspace():
+            continue
+        if char not in LETTER_PATTERNS["LETTER_PATTERNS"]:
+            invalid_chars.append(char)
+    
+    if invalid_chars:
+        await interaction.response.send_message(f"Sorry, I can't convert {', '.join(set(invalid_chars))} into powerline", ephemeral=True)
+        return
+
+    # replace spaces with _
+    filtered_text = ''.join('_' if c.isspace() else c for c in text)
+    
     if contains_swearword(filtered_text):
         responses = [
             "Stop fucking swearing you shit head",
             "Nice try!"
+            "Hey, no swearing!"
         ]
         await interaction.response.send_message(random.choice(responses), ephemeral=True)
         return
