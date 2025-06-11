@@ -4,10 +4,12 @@ from discord import app_commands
 from discord.ext import commands
 from dotenv import load_dotenv
 from emoji_config import get_emoji, get_all_emojis_for_letter
+from regex import contains_swearword
 import json
 import signal
 import sys
 import asyncio
+import random
 
 # Load environment variables
 load_dotenv()
@@ -65,9 +67,17 @@ async def message(interaction: discord.Interaction, text: str):
     )
     
     if not filtered_text:
-        await interaction.response.send_message("Please enter some text with letters or numbers!")
+        await interaction.response.send_message("Please enter some text with letters or numbers!", ephemeral=True)
         return
-    
+        
+    if contains_swearword(filtered_text):
+        responses = [
+            "Stop fucking swearing you shit head",
+            "Nice try!"
+        ]
+        await interaction.response.send_message(random.choice(responses), ephemeral=True)
+        return
+
     # Process all characters in groups of 7
     for i in range(0, len(filtered_text), 7):
         chars = filtered_text[i:i+7]  # Get next 7 characters
