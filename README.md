@@ -1,14 +1,11 @@
 # Discord Power Writing Bot
 
-A Discord bot that converts text into emoji art using custom emoji patterns. The bot reads letter patterns from a JSON file and converts them into Discord emoji messages.
+A Discord bot that converts text into powerline using custom emoji patterns. The bot reads letter patterns from a JSON file and converts them into Discord emoji messages.
 
 ## Features
 
-- Convert text to emoji art using custom emoji patterns
-- Support for multiple characters
-- Automatic message splitting for long text
-- Show available emojis for specific letters
-
+- Convert text to powerline emoji
+- 
 ## Setup
 
 1. Clone the repository
@@ -28,15 +25,6 @@ A Discord bot that converts text into emoji art using custom emoji patterns. The
 ## Commands
 
 - `/message <text>` - Convert text to emoji art
-- `/show_emojis <letter>` - Show all available emojis for a specific letter
-
-## File Structure
-
-- `bot.py` - Main bot code
-- `emoji_config.py` - Emoji configuration and helper functions
-- `letter_patterns.json` - JSON file containing letter patterns
-- `.env` - Environment variables (not tracked in git)
-- `requirements.txt` - Python dependencies
 
 ## License
 
