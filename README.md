@@ -5,7 +5,7 @@ A Discord bot that converts text into powerline using custom emoji patterns. The
 ## Features
 
 - Convert text to powerline emoji
-- 
+  
 ## Setup
 
 1. Clone the repository
@@ -19,7 +19,7 @@ A Discord bot that converts text into powerline using custom emoji patterns. The
    ```
 4. Run the bot:
    ```bash
-   python bot.py
+   python3 bot.py
    ```
 
 ## Commands
