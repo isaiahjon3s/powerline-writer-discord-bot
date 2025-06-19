@@ -62,6 +62,11 @@ async def message(interaction: discord.Interaction, text: str):
         await interaction.response.send_message("Please enter some text!", ephemeral=True)
         return
 
+    # Check character limit
+    if len(text) > 3:
+        await interaction.response.send_message("Please enter no more than 3 characters!", ephemeral=True)
+        return
+
     # Check if all characters are in letter_patterns.json
     invalid_chars = []
     for char in text:
