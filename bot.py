@@ -51,7 +51,7 @@ def signal_handler(sig, frame):
     loop.stop()
     sys.exit(0)
 
-@bot.tree.command(name="message", description="Convert your message to powerline!")
+@bot.tree.command(name="write", description="Convert your message to powerline!")
 async def message(interaction: discord.Interaction, text: str):
     """
     Convert text to emoji art representation
@@ -115,20 +115,6 @@ async def message(interaction: discord.Interaction, text: str):
             # Subsequent messages use interaction.channel.send
             await interaction.channel.send(final_message)
 
-@bot.tree.command(name="show_emojis", description="Show all available emojis for a letter")
-async def show_emojis(interaction: discord.Interaction, letter: str):
-    """
-    Show all available emojis for a given letter
-    Args:
-        letter: The letter to show emojis for
-    """
-    if len(letter) != 1:
-        await interaction.response.send_message("Please enter a single letter!")
-        return
-    
-    emojis = get_all_emojis_for_letter(letter)
-    response = f"Emojis for '{letter}':\n" + " ".join(emojis)
-    await interaction.response.send_message(response)
 
 # Set up signal handler for graceful shutdown
 signal.signal(signal.SIGINT, signal_handler)
