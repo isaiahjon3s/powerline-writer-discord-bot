@@ -86,9 +86,9 @@ async def message(interaction: discord.Interaction, text: str):
         await interaction.response.send_message(random.choice(responses), ephemeral=True)
         return
 
-    # Process all characters in groups of 7
-    for i in range(0, len(text), 7):
-        chars = text[i:i+7]  # Get next 7 characters
+    # Process all characters in groups of 3
+    for i in range(0, len(text), 3):
+        chars = text[i:i+3]  # Get next 3 characters
         
         # Process each line (1-6) for all characters
         message_rows = []
