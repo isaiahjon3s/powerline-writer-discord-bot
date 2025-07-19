@@ -1,4 +1,4 @@
-# Emoji definitions
+# Emoji definitions -> translates from letter_patterns.py
 EMOJIS = {
     'vl': ('<:vl:1376092834356006954>', 2),
     'hl': ('<:hl:1376092817444835339>', 2),
