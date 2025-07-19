@@ -3,7 +3,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 from dotenv import load_dotenv
-from emoji_config import get_emoji, get_all_emojis_for_letter
+from emoji_config import get_emoji
 from regex import contains_swearword
 import json
 import signal
@@ -14,7 +14,7 @@ import random
 # Load environment variables
 load_dotenv()
 
-# Load letter patterns from JSON
+# Load letter_patterns from JSON
 with open('letter_patterns.json', 'r') as f:
     LETTER_PATTERNS = json.load(f)
 
@@ -54,7 +54,7 @@ def signal_handler(sig, frame):
 @bot.tree.command(name="write", description="Convert your message to powerline!")
 async def message(interaction: discord.Interaction, text: str):
     """
-    Convert text to emoji art representation
+    Convert text to powerline emoji
     Args:
         text: The text to convert
     """
