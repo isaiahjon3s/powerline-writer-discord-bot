@@ -4,7 +4,7 @@ A Discord bot that converts text into powerline using custom emoji patterns. The
 
 ## Features
 
-- Convert text to powerline emoji
+- Convert text (no more than 3 letters) to powerline emoji writing
   
 ## Setup
 
