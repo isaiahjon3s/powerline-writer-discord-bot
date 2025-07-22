@@ -16,7 +16,7 @@ load_dotenv()
 with open('letter_patterns.json', 'r') as f:
     LETTER_PATTERNS = json.load(f)
 
-MOD_MESSAGE_LOG_CHANNEL_ID = int(os.getenv('MOD_MESSAGE_LOG_CHANNEL_ID'))
+MOD_MESSAGE_LOG_CHANNEL_ID = os.getenv('MOD_MESSAGE_LOG_CHANNEL_ID')
 
 def convert_characters_to_emoji(characters):
     """
@@ -97,7 +97,7 @@ async def message(interaction: discord.Interaction, text: str):
         await interaction.response.send_message(random.choice(responses), ephemeral=True)
         
         # Send copy of message to moderation channel
-        mod_channel = bot.get_channel(MOD_MESSAGE_LOG_CHANNEL_ID)
+        mod_channel = bot.get_channel(int(MOD_MESSAGE_LOG_CHANNEL_ID))
         if mod_channel:
             user = interaction.user
             await mod_channel.send(
@@ -123,3 +123,4 @@ async def message(interaction: discord.Interaction, text: str):
 
 # Run the bot
 bot.run(os.getenv('DISCORD_TOKEN'))
+bot.run(os.getenv('MOD_MESSAGE_LOG_CHANNEL_ID'))
