@@ -5,7 +5,7 @@ A Discord bot that converts text into powerline using custom emoji patterns. The
 ## Features
 
 - Convert text (up to 3 characters) to powerline emoji writing
-- Built-in swearword detection with evasion protection
+- Built-in swearword detection with evasion protection with log system for moderators
 - Configurable character substitutions for robust filtering
 - Support for all letters and common characters
 
@@ -16,9 +16,10 @@ A Discord bot that converts text into powerline using custom emoji patterns. The
    ```bash
    pip install -r requirements.txt
    ```
-3. Create a `.env` file with your Discord bot token:
+3. Create a `.env` file with your Discord bot token and moderation message log channel id:
    ```
    DISCORD_TOKEN=your_token_here
+   MOD_MESSAGE_LOG_CHANNEL_ID=your_channel_id_here
    ```
 4. Run the bot:
    ```bash
@@ -41,7 +42,7 @@ A Discord bot that converts text into powerline using custom emoji patterns. The
 1. User types `/write <text>` (max 3 characters)
 2. Bot validates characters against available patterns
 3. Bot checks for swearwords (including evasion attempts)
-4. Bot converts each character to 6-line emoji art
+4. Bot converts each character to 6-line emoji art patterns
 5. Bot sends the formatted emoji message
 
 ## License
