@@ -16,6 +16,8 @@ load_dotenv()
 with open('letter_patterns.json', 'r') as f:
     LETTER_PATTERNS = json.load(f)
 
+MOD_MESSAGE_LOG_CHANNEL_ID = int(os.getenv('MOD_MESSAGE_LOG_CHANNEL_ID'))
+
 def convert_characters_to_emoji(characters):
     """
     Convert a group of characters to emoji art
@@ -93,6 +95,18 @@ async def message(interaction: discord.Interaction, text: str):
             "Hey, no swearing!"
         ]
         await interaction.response.send_message(random.choice(responses), ephemeral=True)
+        
+        # Send copy of message to moderation channel
+        mod_channel = bot.get_channel(MOD_MESSAGE_LOG_CHANNEL_ID)
+        if mod_channel:
+            user = interaction.user
+            await mod_channel.send(
+                f"🚨 **Swearword Attempt Detected** 🚨\n"
+                f"User: {user.mention} (`{user}`)\n"
+                f"Message: `{text}`"
+            )
+        else:
+            print("Moderation channel not found or bot lacks access.")
         return
 
     # Process text in groups of 3 characters
