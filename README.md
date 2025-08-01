@@ -44,7 +44,3 @@ A Discord bot that converts text into powerline using custom emoji patterns. The
 3. Bot checks for swearwords (including evasion attempts)
 4. Bot converts each character to 6-line emoji art patterns
 5. Bot sends the formatted emoji message
-
-## License
-
-MIT License 
